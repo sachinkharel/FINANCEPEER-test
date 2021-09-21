@@ -11,8 +11,8 @@ const SignUp = () => {
 
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
+      .then((Auth) => {
+        if (Auth) {
           history.push("/Home");
         }
       })

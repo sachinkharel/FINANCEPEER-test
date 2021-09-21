@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../firebase";
+import { useStateValue } from "./Context/StateProvider";
 import Nav from "./Nav";
+
 const Login = () => {
+  const [state, dispatch] = useStateValue();
   const history = useHistory();
   const signIn = (e) => {
     e.preventDefault();
 
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
-        history.push("/Home");
+      .then((Auth) => {
+        if (Auth) {
+          dispatch({
+            type: "SET_USER",
+            user: Auth,
+          });
+          history.push("/Home");
+        }
       })
       .catch((error) => alert(error.message));
   };

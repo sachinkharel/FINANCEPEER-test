@@ -7,27 +7,30 @@ const Nav = () => {
   const [state, dispatch] = useStateValue();
   const logout = () => {
     if (state.user) {
-      auth.signOut();
+      dispatch({
+        type: "SET_USER",
+        user: null,
+      });
     }
   };
 
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      console.log("The user is >>>>>", authUser);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((authUser) => {
+  //     console.log("The user is >>>>>", authUser);
 
-      if (authUser) {
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
-      } else {
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-      }
-    });
-  }, []);
+  //     if (authUser) {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         user: authUser,
+  //       });
+  //     } else {
+  //       dispatch({
+  //         type: "SET_USER",
+  //         user: null,
+  //       });
+  //     }
+  //   });
+  // }, []);
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -36,10 +39,10 @@ const Nav = () => {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <p>{state.user?.email}</p>
+              Signed in as: <p></p>
             </Navbar.Text>
           </Navbar.Collapse>
-          {state.user ? <Button onClick={logout}>Logout</Button> : ""}
+          <Button onClick={logout}>Logout</Button>
         </Container>
       </Navbar>
     </div>
