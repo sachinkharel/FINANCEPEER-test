@@ -5,6 +5,7 @@ import { useStateValue } from "./Context/StateProvider";
 
 const Nav = () => {
   const [state, dispatch] = useStateValue();
+  // console.log(state.user?.user.email);
   const logout = () => {
     if (state.user) {
       dispatch({
@@ -35,14 +36,14 @@ const Nav = () => {
     <div>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>Navbar with text</Navbar.Brand>
+          <Navbar.Brand>Financepeer Test</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <p></p>
+              Signed in as: <p>{state.user?.user.email}</p>
             </Navbar.Text>
           </Navbar.Collapse>
-          <Button onClick={logout}>Logout</Button>
+          {state.user ? <Button onClick={logout}>Logout</Button> : ""}
         </Container>
       </Navbar>
     </div>
